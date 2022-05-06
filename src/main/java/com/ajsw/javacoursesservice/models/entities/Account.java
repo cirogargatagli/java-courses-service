@@ -1,34 +1,52 @@
 package com.ajsw.javacoursesservice.models.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
 
 @Entity
-@Table(name = "account", schema = "public", catalog = "d9sp9r36nrg2j2")
-public class AccountEntity {
+@Table(name = "account")
+public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_account")
     private int idAccount;
+
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
+
     @Basic
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Column(name = "created_at", nullable = false, columnDefinition = "date DEFAULT 'now()'")
+    private Date createdAt = new Date(System.currentTimeMillis());
+
     @Basic
     @Column(name = "updated_at")
     private Date updatedAt;
+
     @Basic
     @Column(name = "active")
     private Boolean active;
-    @Basic
-    @Column(name = "id_role")
-    private Integer idRole;
+
+    @OneToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
+
+    public Account(String email, String password, Boolean active, Role role) {
+        this.email = email;
+        this.password = password;
+        this.createdAt = new Date(System.currentTimeMillis());
+        this.active = active;
+        this.role = role;
+    }
+
+    public Account() {
+
+    }
 
     public int getIdAccount() {
         return idAccount;
@@ -78,24 +96,11 @@ public class AccountEntity {
         this.active = active;
     }
 
-    public Integer getIdRole() {
-        return idRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setIdRole(Integer idRole) {
-        this.idRole = idRole;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AccountEntity that = (AccountEntity) o;
-        return idAccount == that.idAccount && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(active, that.active) && Objects.equals(idRole, that.idRole);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idAccount, email, password, createdAt, updatedAt, active, idRole);
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "role", schema = "public", catalog = "d9sp9r36nrg2j2")
-public class RoleEntity {
+@Table(name = "activity")
+public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id_role")
-    private int idRole;
+    @Column(name = "id_activity")
+    private int idActivity;
     @Basic
     @Column(name = "description")
     private String description;
 
-    public int getIdRole() {
-        return idRole;
+    public int getIdActivity() {
+        return idActivity;
     }
 
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
+    public void setIdActivity(int idActivity) {
+        this.idActivity = idActivity;
     }
 
     public String getDescription() {
@@ -34,12 +34,12 @@ public class RoleEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RoleEntity that = (RoleEntity) o;
-        return idRole == that.idRole && Objects.equals(description, that.description);
+        Activity activity = (Activity) o;
+        return idActivity == activity.idActivity && Objects.equals(description, activity.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idRole, description);
+        return Objects.hash(idActivity, description);
     }
 }

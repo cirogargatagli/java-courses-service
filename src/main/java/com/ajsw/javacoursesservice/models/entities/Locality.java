@@ -1,11 +1,10 @@
 package com.ajsw.javacoursesservice.models.entities;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "locality", schema = "public", catalog = "d9sp9r36nrg2j2")
-public class LocalityEntity {
+@Table(name = "locality")
+public class Locality {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_locality")
@@ -13,6 +12,9 @@ public class LocalityEntity {
     @Basic
     @Column(name = "name")
     private String name;
+    @Basic
+    @Column(name = "postal_code")
+    private String postalCode;
 
     public int getIdLocality() {
         return idLocality;
@@ -30,16 +32,11 @@ public class LocalityEntity {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LocalityEntity that = (LocalityEntity) o;
-        return idLocality == that.idLocality && Objects.equals(name, that.name);
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idLocality, name);
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }
