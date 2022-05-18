@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ajsw</groupId>
-    <artifactId>java-users-service</artifactId>
+    <artifactId>java-courses-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>java-users-service</name>
-    <description>java-users-service</description>
+    <name>java-courses-service</name>
+    <description>java-courses-service</description>
     <properties>
         <java.version>18</java.version>
     </properties>
@@ -61,6 +61,11 @@
             <artifactId>commons-codec</artifactId>
             <version>1.11</version>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -75,6 +80,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
         </plugins>
