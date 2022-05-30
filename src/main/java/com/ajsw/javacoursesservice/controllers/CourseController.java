@@ -32,18 +32,18 @@ public class CourseController {
         return null;
     }
 
-    @RequestMapping(value = "/",  method = RequestMethod.GET)
-    public List<CourseDto> getAll(){
-        return courseService.getAll();
-    }
+//    @RequestMapping(value = "/",  method = RequestMethod.GET)
+//    public List<CourseDto> getAll(){
+//        return courseService.getAll();
+//    }
 
     @RequestMapping(method = RequestMethod.GET)
     public CourseDto getCourse(@RequestParam(required = false, defaultValue = "0") int id) {
         return courseService.getById(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<CourseDto> getCoursesByLocality(@RequestParam(defaultValue = "0") int idLocality){
-        return courseService.getCoursesByIdLocality(idLocality);
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public List<CourseDto> getCourses(@RequestParam(required = false) String postalCode){
+        return courseService.getCourses(postalCode);
     }
 }

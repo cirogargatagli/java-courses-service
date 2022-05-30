@@ -5,13 +5,17 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "course")
-public class Course {
+public class Course implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 6641056045967898825L;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_course")
