@@ -36,7 +36,15 @@ public class CourseService {
         return listMapper.mapList(courses, CourseDto.class);
     }
 
+    public List<CourseDto> getCourses(String postalCode){
+        return this.getCoursesByPostalCode(postalCode);
+    }
+
     public List<CourseDto> getCoursesByIdLocality(Integer idLocality){
         return listMapper.mapList(courseRepository.getCoursesByAddress_Locality_IdLocality(idLocality), CourseDto.class);
+    }
+
+    public List<CourseDto> getCoursesByPostalCode(String postalCode){
+        return listMapper.mapList(courseRepository.findCoursesByAddress_LocalityPostalCode(postalCode), CourseDto.class);
     }
 }

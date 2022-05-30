@@ -3,15 +3,26 @@ package com.ajsw.javacoursesservice.models.entities;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Instructor extends Person{
+@PrimaryKeyJoinColumn(name = "id_person", foreignKey = @ForeignKey(name = "fk_instructor_person"))
+@OnDelete(action = OnDeleteAction.CASCADE)
+@Table(name = "instructor")
+public class Instructor extends Person implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -1355425955634433304L;
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "idCourse"
+    )
+    @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> courses;
 
@@ -23,11 +34,6 @@ public class Instructor extends Person{
         super(firstName, lastName, phone, account);
     }
 
-    @JsonIdentityInfo(
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id_course"
-    )
-    @JsonIdentityReference(alwaysAsId = true)
     public List<Course> getCourses() {
         return courses;
     }
