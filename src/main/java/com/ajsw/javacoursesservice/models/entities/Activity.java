@@ -14,6 +14,8 @@ public class Activity {
     @Column(name = "description")
     private String description;
 
+    public Activity(int idActivity) { this.idActivity = idActivity; }
+
     public int getIdActivity() {
         return idActivity;
     }

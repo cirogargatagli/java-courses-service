@@ -11,6 +11,11 @@ import java.sql.Date;
 import java.util.List;
 
 public class CourseDto {
+
+    @Getter
+    @Setter
+    private int idCurso;
+
     @Getter
     @Setter
     private Date startTime;

@@ -1,9 +1,9 @@
 package com.ajsw.javacoursesservice.controllers;
 
+import com.ajsw.javacoursesservice.models.dtos.request.CourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
-import com.ajsw.javacoursesservice.models.entities.Course;
 import com.ajsw.javacoursesservice.services.CourseService;
-import io.swagger.models.Response;
+import com.ajsw.javacoursesservice.models.dtos.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -23,19 +23,13 @@ public class CourseController {
     }
 
     @PostMapping()
-    public Response createCourse(@Validated @RequestBody Course courseRequest){
+    public Response createCourse(@Validated @RequestBody CourseRequest courseRequest){
         try{
-//            return courseService.save(courseRequest);
+            return courseService.save(courseRequest);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error registering the client .\n");
         }
-        return null;
     }
-
-//    @RequestMapping(value = "/",  method = RequestMethod.GET)
-//    public List<CourseDto> getAll(){
-//        return courseService.getAll();
-//    }
 
     @RequestMapping(method = RequestMethod.GET)
     public CourseDto getCourse(@RequestParam(required = false, defaultValue = "0") int id) {
@@ -43,7 +37,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<CourseDto> getCourses(@RequestParam(required = false) String postalCode){
-        return courseService.getCourses(postalCode);
+    public List<CourseDto> getCourses(@RequestParam(required = false) Integer idLocality){
+        return courseService.getCourses(idLocality);
     }
 }

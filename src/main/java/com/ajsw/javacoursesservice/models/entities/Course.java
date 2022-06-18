@@ -64,6 +64,15 @@ public class Course implements Serializable {
     public Course() {
     }
 
+    public Course(Date startTime, Date endTime, BigInteger price, Instructor instructor, Activity activity, Address address) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.price = price;
+        this.instructor = instructor;
+        this.activity = activity;
+        this.address = address;
+    }
+
     public int getIdCourse() {
         return idCourse;
     }
