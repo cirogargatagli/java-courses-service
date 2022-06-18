@@ -30,6 +30,8 @@ public class Instructor extends Person implements Serializable {
 
     }
 
+    public Instructor(int idInstructor) { this.idPerson = idInstructor; }
+
     public Instructor(String firstName, String lastName, String phone, Account account) {
         super(firstName, lastName, phone, account);
     }
