@@ -21,6 +21,10 @@ public class Address {
 
     public Address(int idAddress) { this.idAddress = idAddress; }
 
+    public Address() {
+
+    }
+
     public int getIdAddress() {
         return idAddress;
     }

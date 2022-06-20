@@ -16,6 +16,10 @@ public class Activity {
 
     public Activity(int idActivity) { this.idActivity = idActivity; }
 
+    public Activity() {
+
+    }
+
     public int getIdActivity() {
         return idActivity;
     }
