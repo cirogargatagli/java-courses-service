@@ -44,15 +44,27 @@ public class CourseService {
         return listMapper.mapList(courses, CourseDto.class);
     }
 
-    public List<CourseDto> getCourses(Integer idLocality){
-        if(idLocality <= 0){
+    public List<CourseDto> getCourses(Integer idLocality, Integer idActivity){
+        if(idLocality <= 0 && idActivity <= 0){
             return this.getAll();
-        } else {
+        } else if(idActivity <= 0){
             return this.getCoursesByIdLocality(idLocality);
+        } else if(idLocality <= 0){
+            return this.getCoursesByIdActivity(idActivity);
+        } else {
+            return this.getCoursesByLocalityAndActivity(idLocality, idActivity);
         }
     }
 
     public List<CourseDto> getCoursesByIdLocality(Integer idLocality){
         return listMapper.mapList(courseRepository.getCoursesByAddress_Locality_IdLocality(idLocality), CourseDto.class);
+    }
+
+    public List<CourseDto> getCoursesByIdActivity(Integer idActivity){
+        return listMapper.mapList(courseRepository.getCoursesByActivity_IdActivity(idActivity), CourseDto.class);
+    }
+
+    public List<CourseDto> getCoursesByLocalityAndActivity(Integer idLocality, Integer idActivity){
+        return listMapper.mapList(courseRepository.findCoursesByAddress_Locality_IdLocalityAndActivity_IdActivity(idLocality, idActivity), CourseDto.class);
     }
 }

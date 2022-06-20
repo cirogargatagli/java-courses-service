@@ -1,8 +1,11 @@
 package com.ajsw.javacoursesservice.models.entities;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
 public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

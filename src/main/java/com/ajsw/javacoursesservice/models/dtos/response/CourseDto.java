@@ -14,7 +14,7 @@ public class CourseDto {
 
     @Getter
     @Setter
-    private int idCurso;
+    private int idCourse;
 
     @Getter
     @Setter
