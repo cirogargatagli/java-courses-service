@@ -1,10 +1,13 @@
 package com.ajsw.javacoursesservice.models.entities;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "activity")
+@NoArgsConstructor
 public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

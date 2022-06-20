@@ -37,7 +37,10 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<CourseDto> getCourses(@RequestParam(required = false) Integer idLocality){
-        return courseService.getCourses(idLocality);
+    public List<CourseDto> getCourses(
+            @RequestParam(required = false, defaultValue = "0") Integer idLocality,
+            @RequestParam(required = false, defaultValue = "0") Integer idActivity
+    ){
+        return courseService.getCourses(idLocality, idActivity);
     }
 }
