@@ -2,11 +2,11 @@ package com.ajsw.javacoursesservice.models.dtos.response;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigInteger;
 import java.sql.Time;
 
-public class CourseDto {
+public class FullCourseDto {
+
     @Getter
     @Setter
     public int idCourse;
@@ -29,7 +29,15 @@ public class CourseDto {
 
     @Getter
     @Setter
+    public String description;
+
+    @Getter
+    @Setter
     public String imageURL;
+
+    @Getter
+    @Setter
+    public InstructorDto instructor;
 
     @Getter
     @Setter

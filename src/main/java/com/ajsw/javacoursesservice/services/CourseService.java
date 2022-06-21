@@ -2,6 +2,7 @@ package com.ajsw.javacoursesservice.services;
 
 import com.ajsw.javacoursesservice.models.dtos.request.CourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
+import com.ajsw.javacoursesservice.models.dtos.response.FullCourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.EntityCreatedResponse;
 import com.ajsw.javacoursesservice.models.dtos.response.Response;
 import com.ajsw.javacoursesservice.models.entities.Course;
@@ -35,8 +36,8 @@ public class CourseService {
         return new EntityCreatedResponse(newCourse.getIdCourse(), nameEntity);
     }
 
-    public CourseDto getById(Integer id){
-        return modelMapper.map(courseRepository.findById(id).get(), CourseDto.class);
+    public FullCourseDto getById(Integer id){
+        return modelMapper.map(courseRepository.findById(id).get(), FullCourseDto.class);
     }
 
     public List<CourseDto> getAll(){

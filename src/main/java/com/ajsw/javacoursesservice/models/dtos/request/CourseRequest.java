@@ -1,12 +1,14 @@
 package com.ajsw.javacoursesservice.models.dtos.request;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import java.math.BigInteger;
-import java.sql.Date;
+import java.sql.Time;
 
 public class CourseRequest {
-    public Date startTime;
+    public Time startTime;
 
-    public Date endTime;
+    public Time endTime;
 
     public BigInteger price;
 
@@ -15,4 +17,10 @@ public class CourseRequest {
     public int idActivity;
 
     public int idAddress;
+
+    public String tittle;
+
+    public String description;
+
+    public String imageURL;
 }
