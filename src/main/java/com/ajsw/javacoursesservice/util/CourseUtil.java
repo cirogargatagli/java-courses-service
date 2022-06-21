@@ -14,6 +14,9 @@ public class CourseUtil {
           request.startTime,
           request.endTime,
           request.price,
+          request.tittle,
+          request.description,
+          request.imageURL,
           new Instructor(request.idInstructor),
           new Activity(request.idActivity),
           new Address(request.idAddress)

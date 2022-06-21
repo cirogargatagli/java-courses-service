@@ -1,8 +1,6 @@
 package com.ajsw.javacoursesservice.services;
 
-import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
 import com.ajsw.javacoursesservice.models.entities.Activity;
-import com.ajsw.javacoursesservice.models.entities.Course;
 import com.ajsw.javacoursesservice.models.mappers.ListMapper;
 import com.ajsw.javacoursesservice.repositories.IActivityRepository;
 import org.modelmapper.ModelMapper;

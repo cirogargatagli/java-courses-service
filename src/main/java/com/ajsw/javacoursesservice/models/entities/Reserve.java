@@ -2,6 +2,7 @@ package com.ajsw.javacoursesservice.models.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "reserve")
@@ -12,7 +13,7 @@ public class Reserve {
     private int idReserve;
     @Basic
     @Column(name = "created_at", nullable = false)
-    private Date createdAt = new Date(System.currentTimeMillis());
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     @ManyToOne
     @JoinColumn(
@@ -56,11 +57,11 @@ public class Reserve {
         this.idReserve = idReserve;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 

@@ -17,6 +17,10 @@ public class Activity {
     @Column(name = "description")
     private String description;
 
+    @Basic
+    @Column(name = "image_url")
+    private String imageURL;
+
     public Activity(int idActivity) { this.idActivity = idActivity; }
 
     public int getIdActivity() {
@@ -34,6 +38,10 @@ public class Activity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getImageURL() { return imageURL; }
+
+    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 
     @Override
     public boolean equals(Object o) {

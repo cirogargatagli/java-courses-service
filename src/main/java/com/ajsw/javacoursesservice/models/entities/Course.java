@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -22,13 +22,22 @@ public class Course implements Serializable {
     private int idCourse;
     @Basic
     @Column(name = "start_time")
-    private Date startTime;
+    private Time startTime;
     @Basic
     @Column(name = "end_time")
-    private Date endTime;
+    private Time endTime;
     @Basic
     @Column(name = "price")
     private BigInteger price;
+    @Basic
+    @Column(name = "tittle")
+    private String tittle;
+    @Basic
+    @Column(name = "description")
+    private String description;
+    @Basic
+    @Column(name = "imageURL")
+    private String imageURL;
 
     @ManyToOne
     @JoinColumn(
@@ -64,10 +73,14 @@ public class Course implements Serializable {
     public Course() {
     }
 
-    public Course(Date startTime, Date endTime, BigInteger price, Instructor instructor, Activity activity, Address address) {
+    public Course(Time startTime, Time endTime, BigInteger price, String tittle, String description, String imageURL,
+                  Instructor instructor, Activity activity, Address address) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
+        this.tittle = tittle;
+        this.description = description;
+        this.imageURL = imageURL;
         this.instructor = instructor;
         this.activity = activity;
         this.address = address;
@@ -81,19 +94,19 @@ public class Course implements Serializable {
         this.idCourse = idCourse;
     }
 
-    public Date getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 
@@ -104,6 +117,18 @@ public class Course implements Serializable {
     public void setPrice(BigInteger price) {
         this.price = price;
     }
+
+    public String getTittle() { return tittle; }
+
+    public void setTittle(String tittle) { this.tittle = tittle; }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
+
+    public String getImageURL() { return imageURL; }
+
+    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 
     public Instructor getInstructor() {
         return instructor;

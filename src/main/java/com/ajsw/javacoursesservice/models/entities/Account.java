@@ -3,6 +3,7 @@ package com.ajsw.javacoursesservice.models.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "account")
@@ -22,11 +23,11 @@ public class Account implements Serializable {
 
     @Basic
     @Column(name = "created_at", nullable = false, columnDefinition = "date DEFAULT 'now()'")
-    private Date createdAt = new Date(System.currentTimeMillis());
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     @Basic
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private Timestamp updatedAt;
 
     @Basic
     @Column(name = "active")
@@ -39,7 +40,7 @@ public class Account implements Serializable {
     public Account(String email, String password, Boolean active, Role role) {
         this.email = email;
         this.password = password;
-        this.createdAt = new Date(System.currentTimeMillis());
+        this.createdAt = new Timestamp(System.currentTimeMillis());
         this.active = active;
         this.role = role;
     }
@@ -72,19 +73,19 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 

@@ -2,6 +2,7 @@ package com.ajsw.javacoursesservice.controllers;
 
 import com.ajsw.javacoursesservice.models.dtos.request.CourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
+import com.ajsw.javacoursesservice.models.dtos.response.FullCourseDto;
 import com.ajsw.javacoursesservice.services.CourseService;
 import com.ajsw.javacoursesservice.models.dtos.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class CourseController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public CourseDto getCourse(@RequestParam(required = false, defaultValue = "0") int id) {
+    public FullCourseDto getCourse(@RequestParam(required = false, defaultValue = "0") int id) {
         return courseService.getById(id);
     }
 
