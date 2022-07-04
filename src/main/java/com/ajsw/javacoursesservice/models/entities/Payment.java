@@ -20,6 +20,10 @@ public class Payment {
     @Column(name = "payment_method")
     private String paymentMethod;
 
+    @Basic
+    @Column(name = "is_processed")
+    private boolean isProcessed;
+
     public int getIdPayment() {
         return idPayment;
     }
@@ -44,16 +48,20 @@ public class Payment {
         this.paymentMethod = paymentMethod;
     }
 
+    public boolean isProcessed() { return isProcessed; }
+
+    public void setProcessed(boolean processed) { isProcessed = processed; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return idPayment == payment.idPayment && Objects.equals(amount, payment.amount) && Objects.equals(paymentMethod, payment.paymentMethod);
+        return idPayment == payment.idPayment && Objects.equals(amount, payment.amount) && Objects.equals(paymentMethod, payment.paymentMethod) && Objects.equals(isProcessed, payment.isProcessed);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPayment, amount, paymentMethod);
+        return Objects.hash(idPayment, amount, paymentMethod, isProcessed);
     }
 }
