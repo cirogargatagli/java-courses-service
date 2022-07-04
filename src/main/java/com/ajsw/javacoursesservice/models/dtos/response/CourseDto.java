@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.math.BigInteger;
 import java.sql.Time;
-import java.time.LocalTime;
 
 public class CourseDto {
     @Getter
