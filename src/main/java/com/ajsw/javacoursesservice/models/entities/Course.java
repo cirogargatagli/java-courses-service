@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -22,10 +22,10 @@ public class Course implements Serializable {
     private int idCourse;
     @Basic
     @Column(name = "start_time")
-    private Time startTime;
+    private Timestamp startTime;
     @Basic
     @Column(name = "end_time")
-    private Time endTime;
+    private Timestamp endTime;
     @Basic
     @Column(name = "price")
     private BigInteger price;
@@ -73,7 +73,7 @@ public class Course implements Serializable {
     public Course() {
     }
 
-    public Course(Time startTime, Time endTime, BigInteger price, String tittle, String description, String imageURL,
+    public Course(Timestamp startTime, Timestamp endTime, BigInteger price, String tittle, String description, String imageURL,
                   Instructor instructor, Activity activity, Address address) {
         this.startTime = startTime;
         this.endTime = endTime;
@@ -94,19 +94,19 @@ public class Course implements Serializable {
         this.idCourse = idCourse;
     }
 
-    public Time getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 
