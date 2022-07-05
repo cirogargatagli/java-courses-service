@@ -68,4 +68,8 @@ public class CourseService {
     public List<CourseDto> getCoursesByLocalityAndActivity(Integer idLocality, Integer idActivity){
         return listMapper.mapList(courseRepository.findCoursesByAddress_Locality_IdLocalityAndActivity_IdActivity(idLocality, idActivity), CourseDto.class);
     }
+
+    public List<CourseDto> getCoursesByIdInstructor(Integer idInstructor){
+        return listMapper.mapList(courseRepository.getCoursesByInstructor_IdPerson(idInstructor), CourseDto.class);
+    }
 }
