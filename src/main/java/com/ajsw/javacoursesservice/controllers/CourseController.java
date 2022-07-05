@@ -3,6 +3,7 @@ package com.ajsw.javacoursesservice.controllers;
 import com.ajsw.javacoursesservice.models.dtos.request.CourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.FullCourseDto;
+import com.ajsw.javacoursesservice.models.dtos.response.ReserveResponseDto;
 import com.ajsw.javacoursesservice.services.CourseService;
 import com.ajsw.javacoursesservice.models.dtos.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,14 @@ public class CourseController {
     ){
         return courseService.getCourses(idLocality, idActivity);
     }
+
+    @RequestMapping(value ="/instructor",method = RequestMethod.GET)
+    public List<CourseDto> getCoursesByIdInstructor(@RequestParam(required = false, defaultValue = "0") int id){
+        try {
+            return courseService.getCoursesByIdInstructor(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
+        }
+    }
+
 }

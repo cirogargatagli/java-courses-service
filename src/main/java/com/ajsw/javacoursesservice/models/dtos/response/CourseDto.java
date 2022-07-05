@@ -3,7 +3,6 @@ package com.ajsw.javacoursesservice.models.dtos.response;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigInteger;
 import java.sql.Time;
 
 public class CourseDto {
@@ -21,21 +20,9 @@ public class CourseDto {
 
     @Getter
     @Setter
-    public BigInteger price;
-
-    @Getter
-    @Setter
     public String tittle;
 
     @Getter
     @Setter
     public String imageURL;
-
-    @Getter
-    @Setter
-    public ActivityDto activity;
-
-    @Getter
-    @Setter
-    public AddressDto address;
 }
