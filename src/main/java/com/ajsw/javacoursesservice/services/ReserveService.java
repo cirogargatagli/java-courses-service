@@ -20,15 +20,17 @@ import java.util.List;
 public class ReserveService {
     private final IReserveRepository reserveRepository;
     private final PaymentService paymentService;
+    private final MailService mailService;
     private final ReserveUtil reserveUtil;
     private final String nameEntity = "Reserve";
     private final ModelMapper mapper;
     private final ListMapper listMapper;
 
     @Autowired
-    public ReserveService(IReserveRepository reserveRepository, PaymentService paymentService, ReserveUtil reserveUtil, ModelMapper mapper, ListMapper listMapper){
+    public ReserveService(IReserveRepository reserveRepository, PaymentService paymentService, MailService mailService, ReserveUtil reserveUtil, ModelMapper mapper, ListMapper listMapper){
         this.reserveRepository = reserveRepository;
         this.paymentService = paymentService;
+        this.mailService = mailService;
         this.reserveUtil = reserveUtil;
         this.mapper = mapper;
         this.listMapper = listMapper;
@@ -40,7 +42,10 @@ public class ReserveService {
 
         if(paymentResponse.statusCode == 201){
             Reserve reserveCreated = reserveUtil.createReserve(reserveRequest, ((EntityCreatedResponse)paymentResponse).getId());
+
             //Falta enviar email. Iría acá
+
+
             return new EntityCreatedResponse(reserveCreated.getIdReserve(), nameEntity);
         } else {
             return new Response(paymentResponse.statusCode, "The reservation could not be registered. ".concat(paymentResponse.message));
