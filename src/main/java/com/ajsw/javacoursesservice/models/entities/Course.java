@@ -73,6 +73,10 @@ public class Course implements Serializable {
     public Course() {
     }
 
+    public Course(int idCourse) {
+        this.idCourse = idCourse;
+    }
+
     public Course(Timestamp startTime, Timestamp endTime, BigInteger price, String tittle, String description, String imageURL,
                   Instructor instructor, Activity activity, Address address) {
         this.startTime = startTime;

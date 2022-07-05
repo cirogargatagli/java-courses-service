@@ -65,4 +65,8 @@ public class Person {
     public Person() {
 
     }
+
+    public Person(int idPerson){
+        this.idPerson = idPerson;
+    }
 }

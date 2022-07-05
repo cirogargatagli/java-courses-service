@@ -1,11 +1,14 @@
 package com.ajsw.javacoursesservice.models.entities;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "reserve")
+@NoArgsConstructor
 public class Reserve {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -48,6 +51,19 @@ public class Reserve {
     @OneToOne
     @JoinColumn(name = "id_payment")
     private Payment payment;
+
+    public Reserve(Course course, Client client, Payment payment) {
+        this.payment = payment;
+        this.client = client;
+        this.course = course;
+    }
+
+    public Reserve(int idReserve, Course course, Client client, Payment payment) {
+        this.idReserve = idReserve;
+        this.payment = payment;
+        this.client = client;
+        this.course = course;
+    }
 
     public int getIdReserve() {
         return idReserve;
