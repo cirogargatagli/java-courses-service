@@ -39,7 +39,8 @@ public class ReserveService {
         Response paymentResponse = paymentService.payWithMP(mapper.map(reserveRequest.paymentDto, PaymentMPRequest.class));
 
         if(paymentResponse.statusCode == 201){
-            Reserve reserveCreated = reserveUtil.createReserve(reserveRequest, ((EntityCreatedResponse)paymentResponse).getId());
+            Reserve reserve = reserveUtil.createReserve(reserveRequest, ((EntityCreatedResponse)paymentResponse).getId());
+            Reserve reserveCreated = reserveRepository.save(reserve);
             //Falta enviar email. Iría acá
             return new EntityCreatedResponse(reserveCreated.getIdReserve(), nameEntity);
         } else {
