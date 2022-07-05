@@ -35,6 +35,10 @@ public class Client extends Person implements Serializable {
 
     }
 
+    public Client(int idPerson) {
+        super(idPerson);
+    }
+
     public List<Reserve> getReserves() {
         return reserves;
     }

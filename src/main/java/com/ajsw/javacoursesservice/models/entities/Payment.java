@@ -1,11 +1,14 @@
 package com.ajsw.javacoursesservice.models.entities;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
 @Table(name = "payment")
+@NoArgsConstructor
 public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,6 +26,16 @@ public class Payment {
     @Basic
     @Column(name = "is_processed")
     private boolean isProcessed;
+
+    public Payment(int idPayment){
+        this.idPayment = idPayment;
+    }
+
+    public Payment(BigInteger amount, String paymentMethod, boolean isProcessed){
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
+        this.isProcessed = isProcessed;
+    }
 
     public int getIdPayment() {
         return idPayment;
