@@ -24,6 +24,6 @@ public class ReserveResponseDto {
 
     @Getter
     @Setter
-    private PaymentReserveDto paymentReserveDto;
+    private PaymentReserveDto payment;
 
 }

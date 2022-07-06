@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reserve")
+@RequestMapping("/api/reserves")
 public class ReserveController {
 
     private final ReserveService reserveService;
@@ -60,7 +60,7 @@ public class ReserveController {
         }
     }
 
-    @GetMapping("/reserves/{idUser}")
+    @GetMapping("/users/{idUser}")
     public List<ReserveResponseDto> getReservesByUser(@PathVariable int idUser){
         try {
             return reserveService.getReservesByUser(idUser);
