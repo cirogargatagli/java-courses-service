@@ -46,6 +46,11 @@ public class CourseController {
         return courseService.getCourses(idLocality, idActivity);
     }
 
+    @RequestMapping(value = "/full", method = RequestMethod.GET)
+    public List<FullCourseDto> getFullCourses(){
+        return courseService.getFullCourses();
+    }
+
     @RequestMapping(value ="/instructor",method = RequestMethod.GET)
     public List<CourseDto> getCoursesByIdInstructor(@RequestParam(required = false, defaultValue = "0") int id){
         try {

@@ -57,6 +57,10 @@ public class CourseService {
         }
     }
 
+    public List<FullCourseDto> getFullCourses(){
+        return listMapper.mapList(courseRepository.findAll(), FullCourseDto.class);
+    }
+
     public List<CourseDto> getCoursesByIdLocality(Integer idLocality){
         return listMapper.mapList(courseRepository.getCoursesByAddress_Locality_IdLocality(idLocality), CourseDto.class);
     }
