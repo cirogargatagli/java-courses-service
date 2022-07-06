@@ -26,6 +26,8 @@ public class ReserveService {
     private final ModelMapper mapper;
     private final ListMapper listMapper;
 
+
+
     @Autowired
     public ReserveService(IReserveRepository reserveRepository, PaymentService paymentService, MailService mailService, ReserveUtil reserveUtil, ModelMapper mapper, ListMapper listMapper){
         this.reserveRepository = reserveRepository;
@@ -45,7 +47,8 @@ public class ReserveService {
             Reserve reserve = reserveUtil.createReserve(reserveRequest, ((EntityCreatedResponse)paymentResponse).getId());
             
             Reserve reserveCreated = reserveRepository.save(reserve);
-            //Falta enviar email. Iría acá
+
+            String statusEmail = mailService.sendEmail(reserveRequest.getPaymentDto().email, reserveCreated);
 
             return new EntityCreatedResponse(reserveCreated.getIdReserve(), nameEntity);
         } else {

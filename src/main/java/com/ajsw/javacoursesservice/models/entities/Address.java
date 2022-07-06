@@ -55,4 +55,9 @@ public class Address {
     public void setLocality(Locality locality) {
         this.locality = locality;
     }
+
+    @Override
+    public String toString() {
+        return "Address: " + street + " N " + numberHouse + ", " + locality.getName();
+    }
 }

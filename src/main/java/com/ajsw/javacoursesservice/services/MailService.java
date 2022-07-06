@@ -1,44 +1,45 @@
 package com.ajsw.javacoursesservice.services;
 
+import com.ajsw.javacoursesservice.models.entities.Reserve;
+import com.ajsw.javacoursesservice.util.MailUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
-import javax.mail.*;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.util.Date;
-import java.util.Properties;
 
 @Service
 public class MailService {
-    public void sendEmail(String host, String port,
-                                 final String emailUser, final String password,
-                                 String subject, String message) throws AddressException,
-            MessagingException, MessagingException {
 
-        Properties properties = new Properties();// sets SMTP properties
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", port);
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.ssl.trust", host);
+    private JavaMailSender javaMailSender;
 
-        Authenticator auth = new Authenticator() {// se crea una autenticación
-            public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("ciroshaila@gmail.com", "Mi password de aplicación");
-            }
-        };
+    @Value("${spring.mail.username}")
+    private String fromMessage;
+    private MailUtil mailUtil;
 
-        Session session = Session.getInstance(properties, auth);
+    static final String SUBJECT = "Reserve created successfully";
 
-        MimeMessage msg = new MimeMessage(session);// se crea un nuevo email
-        msg.setFrom(new InternetAddress(emailUser));
-        InternetAddress[] toAddresses = { new InternetAddress(emailUser) };
-        msg.setRecipients(Message.RecipientType.TO, toAddresses);
-        msg.setSubject(subject);
-        msg.setSentDate(new Date());
-        msg.setText(message);
+    @Autowired
+    public MailService(JavaMailSender javaMailSender, MailUtil mailUtil){
+        this.javaMailSender = javaMailSender;
+        this.mailUtil = mailUtil;
+    }
 
-        Transport.send(msg);// envio del email
+    public String sendEmail(String emailTo, Reserve reserve){
+
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+
+            message.setFrom(fromMessage);
+            message.setTo(emailTo);
+            message.setSubject(SUBJECT);
+            message.setText(mailUtil.createTextMessage(reserve));
+
+            javaMailSender.send(message);
+
+            return "Mail Sent Successfully";
+        } catch (Exception e){
+            return "Error while Sending Mail";
+        }
     }
 }
