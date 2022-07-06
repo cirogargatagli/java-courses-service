@@ -3,16 +3,11 @@ package com.ajsw.javacoursesservice.models.dtos.response;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 public class PaymentDto {
-    @Getter
-    @Setter
-    @Email
-    public String email;
 
     @Getter
     @Setter

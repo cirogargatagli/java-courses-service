@@ -15,5 +15,9 @@ public class ReservePaymentRequest {
 
     @Getter
     @Setter
+    public String emailAccount;
+
+    @Getter
+    @Setter
     public PaymentDto paymentDto;
 }
