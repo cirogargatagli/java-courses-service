@@ -13,6 +13,7 @@ import com.mercadopago.client.payment.PaymentPayerRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +24,9 @@ public class PaymentService {
 
     static final boolean IS_PROCESSED_OK = true;
     static final boolean NOT_PROCESSED = false;
+
+    @Value("${payment-email-test}")
+    private String emailTest;
 
     public PaymentService(IPaymentRepository paymentRepository, PaymentUtil paymentUtil) {
         this.paymentRepository = paymentRepository;
@@ -43,7 +47,7 @@ public class PaymentService {
                         .paymentMethodId(paymentMPRequest.getPaymentMethodId())
                         .payer(
                                 PaymentPayerRequest.builder()
-                                        .email(paymentMPRequest.getEmail())
+                                        .email(emailTest)
                                         .firstName(paymentMPRequest.getFirstName())
                                         .identification(
                                                 IdentificationRequest.builder()

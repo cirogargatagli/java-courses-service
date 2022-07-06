@@ -48,7 +48,7 @@ public class ReserveService {
             
             Reserve reserveCreated = reserveRepository.save(reserve);
 
-            String statusEmail = mailService.sendEmail(reserveRequest.getPaymentDto().email, reserveCreated);
+            String statusEmail = mailService.sendEmail(reserveRequest.emailAccount, reserveCreated);
 
             return new EntityCreatedResponse(reserveCreated.getIdReserve(), nameEntity);
         } else {
