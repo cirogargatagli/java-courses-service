@@ -25,6 +25,8 @@ public class CourseUtil {
           request.tittle,
           request.description,
           request.imageURL,
+          request.capacity,
+          new Day(request.idDay),
           new Instructor(request.idInstructor),
           new Activity(request.idActivity),
             address

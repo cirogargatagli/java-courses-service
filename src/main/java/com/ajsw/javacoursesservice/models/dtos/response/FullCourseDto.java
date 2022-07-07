@@ -37,6 +37,10 @@ public class FullCourseDto {
 
     @Getter
     @Setter
+    public int capacity;
+
+    @Getter
+    @Setter
     public InstructorDto instructor;
 
     @Getter
@@ -46,4 +50,8 @@ public class FullCourseDto {
     @Getter
     @Setter
     public AddressDto address;
+
+    @Getter
+    @Setter
+    public String nameDay;
 }

@@ -33,4 +33,8 @@ public class CourseRequest {
     public String description;
 
     public String imageURL;
+
+    public int capacity;
+
+    public int idDay;
 }

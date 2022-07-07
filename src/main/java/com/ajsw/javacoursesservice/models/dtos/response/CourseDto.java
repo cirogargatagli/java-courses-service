@@ -25,4 +25,8 @@ public class CourseDto {
     @Getter
     @Setter
     public String imageURL;
+
+    @Getter
+    @Setter
+    public String nameDay;
 }
