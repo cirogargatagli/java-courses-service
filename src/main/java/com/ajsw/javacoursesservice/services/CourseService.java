@@ -32,7 +32,8 @@ public class CourseService {
     }
 
     public Response save(CourseRequest courseRequest){
-        Course newCourse = courseRepository.save(courseUtil.createCourse(courseRequest));
+        Course course = courseUtil.createCourse(courseRequest);
+        Course newCourse = courseRepository.save(course);
         return new EntityCreatedResponse(newCourse.getIdCourse(), nameEntity);
     }
 
