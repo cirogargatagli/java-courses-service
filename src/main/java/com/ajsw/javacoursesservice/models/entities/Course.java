@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -22,10 +22,10 @@ public class Course implements Serializable {
     private int idCourse;
     @Basic
     @Column(name = "start_time")
-    private Timestamp startTime;
+    private Time startTime;
     @Basic
     @Column(name = "end_time")
-    private Timestamp endTime;
+    private Time endTime;
     @Basic
     @Column(name = "price")
     private BigInteger price;
@@ -58,7 +58,7 @@ public class Course implements Serializable {
     @JoinColumn(name = "id_activity")
     private Activity activity;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_address")
     private Address address;
 
@@ -77,7 +77,7 @@ public class Course implements Serializable {
         this.idCourse = idCourse;
     }
 
-    public Course(Timestamp startTime, Timestamp endTime, BigInteger price, String tittle, String description, String imageURL,
+    public Course(Time startTime, Time endTime, BigInteger price, String tittle, String description, String imageURL,
                   Instructor instructor, Activity activity, Address address) {
         this.startTime = startTime;
         this.endTime = endTime;
@@ -98,19 +98,19 @@ public class Course implements Serializable {
         this.idCourse = idCourse;
     }
 
-    public Timestamp getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 
