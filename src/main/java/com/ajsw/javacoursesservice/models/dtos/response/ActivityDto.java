@@ -6,5 +6,8 @@ import lombok.Setter;
 public class ActivityDto {
     @Getter
     @Setter
+    public int idActivity;
+    @Getter
+    @Setter
     public String description;
 }

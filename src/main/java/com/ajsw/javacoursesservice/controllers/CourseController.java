@@ -1,6 +1,7 @@
 package com.ajsw.javacoursesservice.controllers;
 
 import com.ajsw.javacoursesservice.models.dtos.request.CourseRequest;
+import com.ajsw.javacoursesservice.models.dtos.request.UpdateCourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.FullCourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.ReserveResponseDto;
@@ -29,7 +30,16 @@ public class CourseController {
         try{
             return courseService.save(courseRequest);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error registering the client .\n");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error create course .\n");
+        }
+    }
+
+    @PutMapping()
+    public Response updateCourse(@Validated @RequestBody UpdateCourseRequest courseRequest){
+        try{
+            return courseService.updateCourse(courseRequest);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error update course .\n");
         }
     }
 

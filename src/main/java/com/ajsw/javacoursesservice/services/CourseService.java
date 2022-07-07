@@ -1,11 +1,12 @@
 package com.ajsw.javacoursesservice.services;
 
 import com.ajsw.javacoursesservice.models.dtos.request.CourseRequest;
+import com.ajsw.javacoursesservice.models.dtos.request.UpdateCourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.FullCourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.EntityCreatedResponse;
 import com.ajsw.javacoursesservice.models.dtos.response.Response;
-import com.ajsw.javacoursesservice.models.entities.Course;
+import com.ajsw.javacoursesservice.models.entities.*;
 import com.ajsw.javacoursesservice.models.mappers.ListMapper;
 import com.ajsw.javacoursesservice.repositories.ICourseRepository;
 import com.ajsw.javacoursesservice.util.CourseUtil;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CourseService {
@@ -35,6 +37,53 @@ public class CourseService {
         Course course = courseUtil.createCourse(courseRequest);
         Course newCourse = courseRepository.save(course);
         return new EntityCreatedResponse(newCourse.getIdCourse(), nameEntity);
+    }
+
+    public Response updateCourse(UpdateCourseRequest courseRequest){
+        Course course = courseRepository.findById(courseRequest.id).get();
+        if(!Objects.equals(course.getAddress().getStreet(), courseRequest.getAddress().getStreet())){
+            course.getAddress().setStreet(courseRequest.getAddress().getStreet());
+        }
+        if(!Objects.equals(course.getAddress().getNumberHouse(), courseRequest.getAddress().getNumberHouse())){
+            course.getAddress().setNumberHouse(courseRequest.getAddress().getNumberHouse());
+        }
+        if(!Objects.equals(course.getAddress().getLocality().getIdLocality(), courseRequest.getAddress().getIdLocality())){
+            course.getAddress().setLocality(new Locality(courseRequest.getAddress().getIdLocality()));
+        }
+        if(!Objects.equals(course.getInstructor().getIdPerson(), courseRequest.getIdInstructor())){
+            course.setInstructor(new Instructor(courseRequest.getIdInstructor()));
+        }
+        if(!Objects.equals(course.getDay().getIdDay(), courseRequest.getIdDay())){
+            course.setDay(new Day(courseRequest.getIdDay()));
+        }
+        if(!Objects.equals(course.getActivity().getIdActivity(), courseRequest.getIdActivity())){
+            course.setActivity(new Activity(courseRequest.getIdActivity()));
+        }
+        if(!Objects.equals(course.getActivity().getIdActivity(), courseRequest.getIdActivity())){
+            course.setActivity(new Activity(courseRequest.getIdActivity()));
+        }
+        if(!Objects.equals(course.getTittle(), courseRequest.getTittle())){
+            course.setTittle(courseRequest.getTittle());
+        }
+        if(!Objects.equals(course.getPrice(), courseRequest.getPrice())){
+            course.setPrice(courseRequest.getPrice());
+        }
+        if(!Objects.equals(course.getCapacity(), courseRequest.getCapacity())){
+            course.setCapacity(courseRequest.getCapacity());
+        }
+        if(!Objects.equals(course.getDescription(), courseRequest.getDescription())){
+            course.setDescription(courseRequest.getDescription());
+        }
+        if(!Objects.equals(course.getEndTime(), courseRequest.getEndTime())){
+            course.setEndTime(courseRequest.getEndTime());
+        }
+        if(!Objects.equals(course.getImageURL(), courseRequest.getImageURL())){
+            course.setImageURL(courseRequest.getImageURL());
+        }
+        if(!Objects.equals(course.getStartTime(), courseRequest.getStartTime())){
+            course.setStartTime(courseRequest.getStartTime());
+        }
+        return new EntityCreatedResponse(courseRepository.save(course).getIdCourse(), nameEntity);
     }
 
     public FullCourseDto getById(Integer id){
