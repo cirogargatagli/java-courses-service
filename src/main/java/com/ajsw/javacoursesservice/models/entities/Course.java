@@ -38,6 +38,9 @@ public class Course implements Serializable {
     @Basic
     @Column(name = "imageURL")
     private String imageURL;
+    @Basic
+    @Column(name = "capacity")
+    private int capacity;
 
     @ManyToOne
     @JoinColumn(
@@ -62,6 +65,21 @@ public class Course implements Serializable {
     @JoinColumn(name = "id_address")
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "id_day",
+            referencedColumnName = "id_day",
+            foreignKey = @ForeignKey(
+                    name = "fk_course_day",
+                    foreignKeyDefinition = "FOREIGN KEY (id_day)\n" +
+                            "        REFERENCES day (id_day) MATCH SIMPLE\n" +
+                            "        ON UPDATE CASCADE\n" +
+                            "        ON DELETE CASCADE",
+                    value = ConstraintMode.CONSTRAINT
+            )
+    )
+    private Day day;
+
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id_reserve"
@@ -78,13 +96,15 @@ public class Course implements Serializable {
     }
 
     public Course(Time startTime, Time endTime, BigInteger price, String tittle, String description, String imageURL,
-                  Instructor instructor, Activity activity, Address address) {
+                  int capacity, Day day, Instructor instructor, Activity activity, Address address) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
         this.tittle = tittle;
         this.description = description;
         this.imageURL = imageURL;
+        this.capacity = capacity;
+        this.day = day;
         this.instructor = instructor;
         this.activity = activity;
         this.address = address;
@@ -134,6 +154,10 @@ public class Course implements Serializable {
 
     public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 
+    public int getCapacity() { return capacity; }
+
+    public void setCapacity(int capacity) { this.capacity = capacity; }
+
     public Instructor getInstructor() {
         return instructor;
     }
@@ -157,4 +181,8 @@ public class Course implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public Day getDayOfWeek() { return day; }
+
+    public void setDayOfWeek(Day day) { this.day = day; }
 }
