@@ -53,5 +53,5 @@ public class FullCourseDto {
 
     @Getter
     @Setter
-    public String nameDay;
+    public DayResponseDto day;
 }
