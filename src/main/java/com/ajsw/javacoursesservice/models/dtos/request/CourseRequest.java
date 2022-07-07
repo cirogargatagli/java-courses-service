@@ -3,6 +3,7 @@ package com.ajsw.javacoursesservice.models.dtos.request;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.thoughtworks.qdox.model.expression.Add;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ public class CourseRequest {
 
     public int idActivity;
 
-    public int idAddress;
+    public AddressRequest address;
 
     public String tittle;
 
