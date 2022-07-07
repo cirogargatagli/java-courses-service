@@ -182,7 +182,7 @@ public class Course implements Serializable {
         this.address = address;
     }
 
-    public Day getDayOfWeek() { return day; }
+    public Day getDay() { return day; }
 
-    public void setDayOfWeek(Day day) { this.day = day; }
+    public void setDay(Day day) { this.day = day; }
 }
