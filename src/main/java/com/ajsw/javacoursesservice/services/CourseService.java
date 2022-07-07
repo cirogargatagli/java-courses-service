@@ -39,6 +39,11 @@ public class CourseService {
         return new EntityCreatedResponse(newCourse.getIdCourse(), nameEntity);
     }
 
+    public Response delete(int id){
+        courseRepository.deleteById(id);
+        return new Response(200, "Delete successfully");
+    }
+
     public Response updateCourse(UpdateCourseRequest courseRequest){
         Course course = courseRepository.findById(courseRequest.id).get();
         if(!Objects.equals(course.getAddress().getStreet(), courseRequest.getAddress().getStreet())){

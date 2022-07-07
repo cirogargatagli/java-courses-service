@@ -34,6 +34,15 @@ public class CourseController {
         }
     }
 
+    @DeleteMapping(value="/{idCourse}")
+    public Response deleteCourse(@PathVariable int idCourse){
+        try{
+            return courseService.delete(idCourse);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error delete course .\n");
+        }
+    }
+
     @PutMapping()
     public Response updateCourse(@Validated @RequestBody UpdateCourseRequest courseRequest){
         try{
