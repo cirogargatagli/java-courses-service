@@ -28,5 +28,5 @@ public class CourseDto {
 
     @Getter
     @Setter
-    public String nameDay;
+    public DayResponseDto day;
 }
