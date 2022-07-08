@@ -7,6 +7,7 @@ import com.ajsw.javacoursesservice.models.dtos.response.FullCourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.EntityCreatedResponse;
 import com.ajsw.javacoursesservice.models.dtos.response.Response;
 import com.ajsw.javacoursesservice.models.entities.*;
+import com.ajsw.javacoursesservice.models.mappers.CourseMapper;
 import com.ajsw.javacoursesservice.models.mappers.ListMapper;
 import com.ajsw.javacoursesservice.repositories.ICourseRepository;
 import com.ajsw.javacoursesservice.util.CourseUtil;
@@ -21,15 +22,15 @@ import java.util.Objects;
 public class CourseService {
     private final ICourseRepository courseRepository;
     private final ModelMapper modelMapper;
-    private final ListMapper listMapper;
+    private final CourseMapper courseMapper;
     private final CourseUtil courseUtil;
     private final String nameEntity = "Course";
 
     @Autowired
-    public CourseService(ICourseRepository courseRepository, ModelMapper modelMapper, ListMapper listMapper, CourseUtil courseUtil){
+    public CourseService(ICourseRepository courseRepository, ModelMapper modelMapper, CourseMapper courseMapper, CourseUtil courseUtil){
         this.courseRepository = courseRepository;
         this.modelMapper = modelMapper;
-        this.listMapper = listMapper;
+        this.courseMapper = courseMapper;
         this.courseUtil = courseUtil;
     }
 
@@ -87,12 +88,11 @@ public class CourseService {
     }
 
     public FullCourseDto getById(Integer id){
-        return modelMapper.map(courseRepository.findById(id).get(), FullCourseDto.class);
+        return courseMapper.mapCourseToFullCourseDto(courseRepository.findById(id).get());
     }
 
     public List<CourseDto> getAll(){
-        List<Course> courses = courseRepository.findAll();
-        return listMapper.mapList(courses, CourseDto.class);
+       return courseMapper.mapCoursesToCoursesDto(courseRepository.findAll());
     }
 
     public List<CourseDto> getCourses(Integer idLocality, Integer idActivity){
@@ -108,22 +108,22 @@ public class CourseService {
     }
 
     public List<FullCourseDto> getFullCourses(){
-        return listMapper.mapList(courseRepository.findAll(), FullCourseDto.class);
+        return courseMapper.mapCoursesToFullCoursesDto(courseRepository.findAll());
     }
 
     public List<CourseDto> getCoursesByIdLocality(Integer idLocality){
-        return listMapper.mapList(courseRepository.getCoursesByAddress_Locality_IdLocality(idLocality), CourseDto.class);
+        return courseMapper.mapCoursesToCoursesDto(courseRepository.getCoursesByAddress_Locality_IdLocality(idLocality));
     }
 
     public List<CourseDto> getCoursesByIdActivity(Integer idActivity){
-        return listMapper.mapList(courseRepository.getCoursesByActivity_IdActivity(idActivity), CourseDto.class);
+        return courseMapper.mapCoursesToCoursesDto(courseRepository.getCoursesByActivity_IdActivity(idActivity));
     }
 
     public List<CourseDto> getCoursesByLocalityAndActivity(Integer idLocality, Integer idActivity){
-        return listMapper.mapList(courseRepository.findCoursesByAddress_Locality_IdLocalityAndActivity_IdActivity(idLocality, idActivity), CourseDto.class);
+        return courseMapper.mapCoursesToCoursesDto(courseRepository.findCoursesByAddress_Locality_IdLocalityAndActivity_IdActivity(idLocality, idActivity));
     }
 
     public List<CourseDto> getCoursesByIdInstructor(Integer idInstructor){
-        return listMapper.mapList(courseRepository.getCoursesByInstructor_IdPerson(idInstructor), CourseDto.class);
+        return courseMapper.mapCoursesToCoursesDto(courseRepository.getCoursesByInstructor_IdPerson(idInstructor));
     }
 }

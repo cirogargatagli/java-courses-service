@@ -54,4 +54,8 @@ public class FullCourseDto {
     @Getter
     @Setter
     public DayResponseDto day;
+
+    @Getter
+    @Setter
+    public int reservesCount;
 }
