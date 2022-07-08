@@ -185,4 +185,8 @@ public class Course implements Serializable {
     public Day getDay() { return day; }
 
     public void setDay(Day day) { this.day = day; }
+
+    public List<Reserve> getReserves() { return reserves; }
+
+    public void setReserves(List<Reserve> reserves) { this.reserves = reserves; }
 }

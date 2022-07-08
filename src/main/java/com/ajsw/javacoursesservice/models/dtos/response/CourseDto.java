@@ -29,4 +29,12 @@ public class CourseDto {
     @Getter
     @Setter
     public DayResponseDto day;
+
+    @Getter
+    @Setter
+    public int capacity;
+
+    @Getter
+    @Setter
+    public int reservesCount;
 }
