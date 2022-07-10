@@ -65,15 +65,20 @@ public class CourseController {
         return courseService.getCourses(idLocality, idActivity);
     }
 
+    @RequestMapping(value = "/most-reserved", method = RequestMethod.GET)
+    public List<CourseDto> getMostReserved(){
+        return courseService.mostReserved();
+    }
+
     @RequestMapping(value = "/full", method = RequestMethod.GET)
     public List<FullCourseDto> getFullCourses(){
         return courseService.getFullCourses();
     }
 
-    @RequestMapping(value ="/instructor",method = RequestMethod.GET)
-    public List<CourseDto> getCoursesByIdInstructor(@RequestParam(required = false, defaultValue = "0") int id){
+    @RequestMapping(value ="/instructor/{idInstructor}",method = RequestMethod.GET)
+    public List<FullCourseDto> getCoursesByIdInstructor(@PathVariable int idInstructor){
         try {
-            return courseService.getCoursesByIdInstructor(id);
+            return courseService.getCoursesByIdInstructor(idInstructor);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
         }

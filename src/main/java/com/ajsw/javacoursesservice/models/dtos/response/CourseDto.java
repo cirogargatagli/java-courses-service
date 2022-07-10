@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.sql.Time;
 
-public class CourseDto {
+public class CourseDto{
     @Getter
     @Setter
     public int idCourse;

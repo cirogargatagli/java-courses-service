@@ -15,6 +15,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -128,7 +130,13 @@ public class CourseService {
         return courseMapper.mapCoursesToCoursesDto(courseRepository.findCoursesByAddress_Locality_IdLocalityAndActivity_IdActivity(idLocality, idActivity));
     }
 
-    public List<CourseDto> getCoursesByIdInstructor(Integer idInstructor){
-        return courseMapper.mapCoursesToCoursesDto(courseRepository.getCoursesByInstructor_IdPerson(idInstructor));
+    public List<FullCourseDto> getCoursesByIdInstructor(Integer idInstructor){
+        return courseMapper.mapCoursesToFullCoursesDto(courseRepository.getCoursesByInstructor_IdPerson(idInstructor));
+    }
+
+    public List<CourseDto> mostReserved(){
+        List<CourseDto> allCourses = getAll();
+        allCourses.sort((c1, c2) -> c2.reservesCount - c1.reservesCount);
+        return allCourses.size() > 3 ? allCourses.subList(0,3) : allCourses;
     }
 }
