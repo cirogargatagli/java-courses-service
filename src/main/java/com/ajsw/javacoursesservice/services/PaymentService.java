@@ -28,13 +28,16 @@ public class PaymentService {
     @Value("${payment-email-test}")
     private String emailTest;
 
+//    @Value("${mp-access-token}")
+//    private String accessToken;
+
     public PaymentService(IPaymentRepository paymentRepository, PaymentUtil paymentUtil) {
         this.paymentRepository = paymentRepository;
         this.paymentUtil = paymentUtil;
     }
 
     public Response payWithMP(PaymentMPRequest paymentMPRequest){
-        MercadoPagoConfig.setAccessToken("TEST-3270230910219779-050921-f50e9b38e7349b758d28ce74f120d006-1120909340");
+        MercadoPagoConfig.setAccessToken("TEST-1326476364225901-071001-5f9c18e98828279e17fcddc4f46e5723-1157887152");
 
         PaymentClient client = new PaymentClient();
 

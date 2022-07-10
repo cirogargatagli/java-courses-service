@@ -22,6 +22,10 @@ public class Activity {
     private String imageURL;
 
     public Activity(int idActivity) { this.idActivity = idActivity; }
+    public Activity(String description) {
+        this.idActivity = 0;
+        this.description = description;
+    }
 
     public int getIdActivity() {
         return idActivity;
