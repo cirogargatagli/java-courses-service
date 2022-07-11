@@ -4,6 +4,8 @@ import com.ajsw.javacoursesservice.models.dtos.request.ReservePaymentRequest;
 import com.ajsw.javacoursesservice.models.dtos.request.ReserveRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.ReserveResponseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.Response;
+import com.ajsw.javacoursesservice.models.enums.RoleEnum;
+import com.ajsw.javacoursesservice.services.JwtService;
 import com.ajsw.javacoursesservice.services.ReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,15 +20,18 @@ import java.util.List;
 public class ReserveController {
 
     private final ReserveService reserveService;
+    private final JwtService jwtService;
 
     @Autowired
-    public ReserveController(ReserveService _reserveService){
+    public ReserveController(ReserveService _reserveService, JwtService jwtService){
         reserveService = _reserveService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping()
-    public Response createReserveAndPayment(@Validated @RequestBody ReservePaymentRequest reservePaymentRequest){
+    public Response createReserveAndPayment(@RequestHeader(value = "Authorization") String authToken, @Validated @RequestBody ReservePaymentRequest reservePaymentRequest){
         try {
+            jwtService.validateToken(authToken, RoleEnum.Client.name());
             return reserveService.saveReserveAndPayment(reservePaymentRequest);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
@@ -61,8 +66,9 @@ public class ReserveController {
     }
 
     @GetMapping("/users/{idUser}")
-    public List<ReserveResponseDto> getReservesByUser(@PathVariable int idUser){
+    public List<ReserveResponseDto> getReservesByUser(@RequestHeader(value = "Authorization") String authToken, @PathVariable int idUser){
         try {
+            jwtService.validateToken(authToken, RoleEnum.Client.name());
             return reserveService.getReservesByUser(idUser);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");

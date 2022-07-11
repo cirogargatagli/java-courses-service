@@ -4,9 +4,10 @@ import com.ajsw.javacoursesservice.models.dtos.request.CourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.request.UpdateCourseRequest;
 import com.ajsw.javacoursesservice.models.dtos.response.CourseDto;
 import com.ajsw.javacoursesservice.models.dtos.response.FullCourseDto;
-import com.ajsw.javacoursesservice.models.dtos.response.ReserveResponseDto;
+import com.ajsw.javacoursesservice.models.enums.RoleEnum;
 import com.ajsw.javacoursesservice.services.CourseService;
 import com.ajsw.javacoursesservice.models.dtos.response.Response;
+import com.ajsw.javacoursesservice.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -19,15 +20,18 @@ import java.util.List;
 @RequestMapping("/api/courses")
 public class CourseController {
     private final CourseService courseService;
+    private final JwtService jwtService;
 
     @Autowired
-    public CourseController(CourseService courseService){
+    public CourseController(CourseService courseService, JwtService jwtService){
         this.courseService = courseService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping()
-    public Response createCourse(@Validated @RequestBody CourseRequest courseRequest){
+    public Response createCourse(@RequestHeader(value = "Authorization") String authToken, @Validated @RequestBody CourseRequest courseRequest){
         try{
+            jwtService.validateToken(authToken, RoleEnum.Admin.name());
             return courseService.save(courseRequest);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error create course .\n");
@@ -35,8 +39,9 @@ public class CourseController {
     }
 
     @DeleteMapping(value="/{idCourse}")
-    public Response deleteCourse(@PathVariable int idCourse){
+    public Response deleteCourse(@RequestHeader(value = "Authorization") String authToken, @PathVariable int idCourse){
         try{
+            jwtService.validateToken(authToken, RoleEnum.Admin.name());
             return courseService.delete(idCourse);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error delete course .\n");
@@ -44,8 +49,9 @@ public class CourseController {
     }
 
     @PutMapping()
-    public Response updateCourse(@Validated @RequestBody UpdateCourseRequest courseRequest){
+    public Response updateCourse(@RequestHeader(value = "Authorization") String authToken, @Validated @RequestBody UpdateCourseRequest courseRequest){
         try{
+            jwtService.validateToken(authToken, RoleEnum.Admin.name());
             return courseService.updateCourse(courseRequest);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error update course .\n");
@@ -76,8 +82,9 @@ public class CourseController {
     }
 
     @RequestMapping(value ="/instructor/{idInstructor}",method = RequestMethod.GET)
-    public List<FullCourseDto> getCoursesByIdInstructor(@PathVariable int idInstructor){
+    public List<FullCourseDto> getCoursesByIdInstructor(@RequestHeader(value = "Authorization") String authToken, @PathVariable int idInstructor){
         try {
+            jwtService.validateToken(authToken, RoleEnum.Instructor.name());
             return courseService.getCoursesByIdInstructor(idInstructor);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
